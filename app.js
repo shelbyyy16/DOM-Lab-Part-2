@@ -2,49 +2,44 @@ console.log('js:loaded');
 
 const menuLinks = [
     {text: 'about', href: '/about'},
-    {text: 'catalog', href: '/catalog'},
-    {text: 'orders', href: '/orders'},
-    {text: 'account', href: '/account'},
+    {text: 'catalog', href: '#', subLinks: [
+      {text: 'all', href: '/catalog/all'},
+      {text: 'top selling', href: '/catalog/top'},
+      {text: 'search', href: '/catalog/search'},
+    ]},
+    {text: 'orders', href: '#' , subLinks: [
+      {text: 'new', href: '/orders/new'},
+      {text: 'pending', href: '/orders/pending'},
+      {text: 'history', href: '/orders/history'},
+    ]},
+    {text: 'account', href: '#', subLinks: [
+      {text: 'profile', href: '/account/profile'},
+      {text: 'sign out', href: '/account/signout'},
+    ]},
   ];
 
 
-//Cache the <main> element in a variable named mainEl
+//TASK 1
 
 const mainEl = document.querySelector("main");
 
-
-//Set the background color of the mainEl element using the --main-bg CSS custom property
-
 mainEl.style.backgroundColor = 'var(--main-bg)';
-
-//Set the content of mainEl to <h1>SEI Rocks!</h1>.
 
 mainEl.innerHTML = "<h1>SEI Rocks!</h1>";
 
-//Add a class of "flex-ctr" to the mainEl element
-
 mainEl.classList.add("flex-ctr");
 
-//Cache the <nav id="top-menu"> element in a variable named topMenuEl
+//TASK 2
 
 const topMenuEl = document.getElementById("top-menu");
 
-//Set the height topMenuEl element to be 100%.
-
 topMenuEl.style.height = "100%";
-
-//Set the background color of topMenuEl using the --top-menu-bg CSS custom property.
 
 topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
 
-//Add a class of flex-around to topMenuEl.
-
 topMenuEl.classList.add("flex-around");
 
-//Create an <a> for every "link" object
-//On the new element, add an href attribute with its value set to the href property of the “link” 
-//Set the new element’s content to the value of the text property of the “link” object.
-//Append the new element to the topMenuEl element using the node.appendChild method
+//TASK 3
 
 menuLinks.forEach(function (link) {
     const anchorElement = document.createElement("a");
@@ -53,14 +48,39 @@ menuLinks.forEach(function (link) {
     topMenuEl.appendChild(anchorElement);
 });
 
-//Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+
+//TASK 4
+
 
 const subMenuEl = document.getElementById('sub-menu');
 
-//Set the background color of subMenuEl using the --sub-menu-bg CSS custom property.
+subMenuEl.style.height = "100%";
 
 subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
 
-//Add the class of flex-around to the subMenuEl element
-
 subMenuEl.classList.add('flex-around');
+
+subMenuEl.style.position = 'absolute';
+
+subMenuEl.style.top = '0';
+
+//TASK 5
+
+const topMenuLinks = topMenuEl.querySelectorAll('a');
+
+let showingSubMenu = false;
+
+// Assuming you have already selected topMenuEl and topMenuLinks as shown earlier.
+
+topMenuEl.addEventListener('click', function(event) {
+    event.preventDefault();
+    if (event.target.tagName !== 'A') {
+        return;
+    }
+    console.log(event.target.textContent);
+});
+
+
+
+
+
