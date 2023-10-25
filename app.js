@@ -79,41 +79,42 @@ const topMenuLinks = topMenuEl.querySelectorAll("a");
 
 let showingSubMenu = false;
 
-topMenuEl.addEventListener('click', function(event) {
-    event.preventDefault();
+topMenuEl.addEventListener("click", function (event) {
+  event.preventDefault();
 
-    if (event.target.tagName !== 'A') {
-        return;
-    }
-    topMenuLinks.forEach(function(link) {
-        link.classList.remove('active');
-    });
-    if (event.target.classList.contains('active')) {
-        event.target.classList.remove('active');
-        showingSubMenu = false;
-        subMenuEl.style.top = '0';
-        showingSubMenu = false;
-        return;
-    }
-    event.target.classList.add('active');
+  if (event.target.tagName !== "A") {
+    return;
+  }
+  topMenuLinks.forEach(function (link) {
+    link.classList.remove("active");
+  });
+  if (event.target.classList.contains("active")) {
+    event.target.classList.remove("active");
+    showingSubMenu = false;
+    subMenuEl.style.top = "0";
+    showingSubMenu = false;
+    return;
+  }
+  event.target.classList.add("active");
 
-    const linkObject = menuLinks.find(link => link.text === event.target.textContent);
-
-    if (linkObject && linkObject.subLinks) {
-        showingSubMenu = true;
-        buildSubMenu(linkObject.subLinks);
-        subMenuEl.style.top = '100%';
-    } else {
-        showingSubMenu = false;
-        subMenuEl.style.top = '0';
-    }
-    console.log(event.target.textContent);
-
-    if (event.target.textContent === 'about') {
-        mainEl.innerHTML = '<h1>about</h1>';
-    }
+  const linkObject = menuLinks.find(function(link) {
+    return link.text === event.target.textContent;
 });
 
+  if (linkObject && linkObject.subLinks) {
+    showingSubMenu = true;
+    buildSubMenu(linkObject.subLinks);
+    subMenuEl.style.top = "100%";
+  } else {
+    showingSubMenu = false;
+    subMenuEl.style.top = "0";
+  }
+  console.log(event.target.textContent);
+
+  if (event.target.textContent === "about") {
+    mainEl.innerHTML = "<h1>about</h1>";
+  }
+});
 
 function buildSubMenu(subLinks) {
   subMenuEl.innerHTML = "";
@@ -125,3 +126,22 @@ function buildSubMenu(subLinks) {
     subMenuEl.appendChild(subLinkElement);
   });
 }
+
+//TASK 6
+
+subMenuEl.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  if (event.target.tagName !== "A") {
+    return;
+  }
+  console.log(event.target.textContent);
+
+  showingSubMenu = false;
+  subMenuEl.style.top = "0";
+
+  topMenuLinks.forEach(function (link) {
+    link.classList.remove("active");
+  });
+  mainEl.innerHTML = "<h1>" + event.target.textContent + "</h1>";
+});
