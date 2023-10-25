@@ -70,15 +70,55 @@ const topMenuLinks = topMenuEl.querySelectorAll('a');
 
 let showingSubMenu = false;
 
+// Assuming you have already selected topMenuEl, topMenuLinks, subMenuEl, and declared showingSubMenu as mentioned earlier.
+
 topMenuEl.addEventListener('click', function(event) {
     event.preventDefault();
+
     if (event.target.tagName !== 'A') {
         return;
     }
+
+    if (event.target.classList.contains('active')) {
+        event.target.classList.remove('active');
+        showingSubMenu = false;
+        subMenuEl.style.top = '0';
+        return;
+    }
+    const linkObject = menuLinks.find(link => link.title === event.target.textContent);
+
+    if (linkObject && linkObject.subLinks) {
+        showingSubMenu = true;
+        buildSubMenu(linkObject.subLinks);
+        subMenuEl.style.top = '100%';
+    } else {
+        showingSubMenu = false;
+        subMenuEl.style.top = '0';
+    }
+    
+    event.target.classList.add('active');
+
     console.log(event.target.textContent);
+
+    topMenuLinks.forEach(function(link) {
+        link.classList.remove('active');
+    });
+
+    if (event.target.textContent === 'About') {
+        mainEl.innerHTML = '<h1>about</h1>';
+    }
 });
 
+function buildSubMenu(subLinks) {
+    
+    subMenuEl.innerHTML = '';
 
-
-
+    
+    subLinks.forEach(function(link) {
+        const subLinkElement = document.createElement('a');
+        subLinkElement.href = link.href; 
+        subLinkElement.textContent = link.text; 
+        subMenuEl.appendChild(subLinkElement); 
+    });
+}
 
