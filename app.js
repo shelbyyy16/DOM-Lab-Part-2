@@ -70,8 +70,6 @@ const topMenuLinks = topMenuEl.querySelectorAll('a');
 
 let showingSubMenu = false;
 
-// Assuming you have already selected topMenuEl and topMenuLinks as shown earlier.
-
 topMenuEl.addEventListener('click', function(event) {
     event.preventDefault();
     if (event.target.tagName !== 'A') {
