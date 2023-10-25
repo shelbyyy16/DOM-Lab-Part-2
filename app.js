@@ -53,10 +53,10 @@ topMenuEl.classList.add("flex-around");
 //TASK 3
 
 menuLinks.forEach(function (link) {
-  const anchorElement = document.createElement("a");
-  anchorElement.setAttribute("href", link.href);
-  anchorElement.textContent = link.text;
-  topMenuEl.appendChild(anchorElement);
+  const linkEl = document.createElement("a");
+  linkEl.setAttribute("href", link.href);
+  linkEl.textContent = link.text;
+  topMenuEl.appendChild(linkEl);
 });
 
 //TASK 4
